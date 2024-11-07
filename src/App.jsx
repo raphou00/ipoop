@@ -16,17 +16,6 @@ const keyboardMap = [
     { name: "run", keys: ["Shift"] }
 ];
 
-const animationSet = {
-    idle: "animation",
-    walk: "animation",
-    run: "animation",
-    jump: "animation",
-    jumpIdle: "animation",
-    jumpLand: "animation",
-    fall: "animation",
-    action1: "animation",
-};
-
 const Scene = () => {
     const player = useRef();
 
@@ -68,8 +57,8 @@ const Scene = () => {
             >
                 <Gltf
                     src="/models/map/scene.gltf"
-                    scale={0.01}
-                    position={[0, 90, 0]}
+                    scale={90}
+                    position={[0, 0, 0]}
                     receiveShadow
                     castShadow
                 />
@@ -87,15 +76,14 @@ const Scene = () => {
                     maxVelLimit={5}
                     sprintMult={1.5}
                     rotationSpeed={15}
-                    position={[0, 120, 0]}
-                    animated
+                    position={[0, 100, 0]}
                 >
                     <Gltf
                         ref={player}
                         src="/models/gun/scene.gltf"
-                        position={[-0.5, 0.2, 0.3]}
-                        rotation={[0, -Math.PI / 2, 0]}
-                        scale={0.02}
+                        position={[-0.07, 0.45, 0.14]}
+                        rotation={[0, Math.PI / 2, 0]}
+                        scale={0.03}
                         receiveShadow
                         castShadow
                     />
@@ -114,19 +102,19 @@ const App = () => {
 
             <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-px h-px border bg-white z-50" />
 
-            <Canvas
-                gl={{ powerPreference: "high-performance" }}
-                onPointerDown={(e) => {
-                    if (e.pointerType === "mouse") {
-                        e.target.requestPointerLock()
-                    }
-                }}
-                shadows
-            >
-                <Suspense fallback={null}>
+            <Suspense fallback={null}>
+                <Canvas
+                    gl={{ powerPreference: "high-performance" }}
+                    onPointerDown={(e) => {
+                        if (e.pointerType === "mouse") {
+                            e.target.requestPointerLock()
+                        }
+                    }}
+                    shadows
+                >
                     <Scene />
-                </Suspense>
-            </Canvas>
+                </Canvas>
+            </Suspense>
 
         </div>
     );

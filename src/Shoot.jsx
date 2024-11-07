@@ -1,8 +1,8 @@
+import { Fragment } from "react";
 import * as THREE from "three";
-import { RigidBody } from "@react-three/rapier";
 import { useRef, useMemo, useState, useEffect } from "react";
-import { Trail } from "@react-three/drei";
 import { useGame } from "ecctrl";
+import { RigidBody } from "@react-three/rapier";
 
 const Shoot = ({ player }) => {
     const { action1 } = useGame();
@@ -28,7 +28,7 @@ const Shoot = ({ player }) => {
             const camQuat = player.current.getWorldQuaternion(new THREE.Quaternion());
             
             const d = 2;
-            const v = new THREE.Vector3(0.1, 0, 0.1);
+            const v = new THREE.Vector3(-0.05, 0, 0.1);
             v.applyQuaternion(camQuat);
             v.multiplyScalar(d);
             position.copy(camPos).add(v);
@@ -41,7 +41,7 @@ const Shoot = ({ player }) => {
                     receiveShadow
                 >
                     <sphereGeometry args={[0.05]} />
-                    <meshStandardMaterial color={0xaaaaff} />
+                    <meshStandardMaterial color={0xffff00} />
                 </mesh>
             );
             setCubeMesh((prevMeshes) => [...prevMeshes, newMesh]);
